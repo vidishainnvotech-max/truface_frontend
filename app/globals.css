@@ -1,26 +1,239 @@
 @import "tailwindcss";
 
+/* ------------------------------------------------------------------
+   Design tokens (from brand palette spec)
+   ------------------------------------------------------------------ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Brand */
+  --brand-primary: #002162;
+  --brand-primary-hover: #0a3a8a;
+  --brand-primary-active: #001a4d;
+  --brand-secondary: #0180c1;
+  --brand-secondary-hover: #1a92d1;
+  --brand-secondary-active: #016ba3;
+  --brand-accent: #00b7d2;
+  --brand-accent-hover: #21c6dd;
+  --brand-accent-active: #0099b0;
+  --brand-subheading: #555555;
+
+  /* CTA blue (auth screens / primary actions) */
+  --brand-cta: #2563eb;
+  --brand-cta-hover: #1d4ed8;
+  --brand-cta-active: #1e40af;
+
+  /* Surfaces */
+  --surface: #ffffff;
+  --surface-muted: #f6f8fb;
+  --surface-row-alt: #eef3fa;
+  --surface-row-highlight: #e5f9fb;
+  --border: #e3e8ef;
+  --border-strong: #cbd5e1;
+
+  /* Text */
+  --text-primary: #0f172a;
+  --text-secondary: #555555;
+  --text-muted: #8a94a6;
+  --text-inverse: #ffffff;
+
+  /* Semantic */
+  --success: #16a34a;
+  --success-bg: #dcfce7;
+  --warning: #d97706;
+  --warning-bg: #fef3c7;
+  --danger: #dc2626;
+  --danger-bg: #fee2e2;
+  --info: #0180c1;
+  --info-bg: #e0f2fe;
+  --neutral: #4b5563;
+  --neutral-bg: #e5e7eb;
+
+  /* Layout */
+  --sidebar-width: 16rem;
+  --header-height: 4rem;
+  --radius: 0.5rem;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--surface);
+  --color-primary: var(--brand-primary);
+  --color-primary-hover: var(--brand-primary-hover);
+  --color-primary-active: var(--brand-primary-active);
+  --color-secondary: var(--brand-secondary);
+  --color-secondary-hover: var(--brand-secondary-hover);
+  --color-secondary-active: var(--brand-secondary-active);
+  --color-accent: var(--brand-accent);
+  --color-accent-hover: var(--brand-accent-hover);
+  --color-accent-active: var(--brand-accent-active);
+  --color-subheading: var(--brand-subheading);
+  --color-cta: var(--brand-cta);
+  --color-cta-hover: var(--brand-cta-hover);
+  --color-cta-active: var(--brand-cta-active);
+
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-row-alt: var(--surface-row-alt);
+  --color-row-highlight: var(--surface-row-highlight);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+
+  --color-foreground: var(--text-primary);
+  --color-foreground-secondary: var(--text-secondary);
+  --color-foreground-muted: var(--text-muted);
+  --color-foreground-inverse: var(--text-inverse);
+
+  --color-success: var(--success);
+  --color-success-bg: var(--success-bg);
+  --color-warning: var(--warning);
+  --color-warning-bg: var(--warning-bg);
+  --color-danger: var(--danger);
+  --color-danger-bg: var(--danger-bg);
+  --color-info: var(--info);
+  --color-info-bg: var(--info-bg);
+  --color-neutral: var(--neutral);
+  --color-neutral-bg: var(--neutral-bg);
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+  --font-heading: var(--font-geist-sans), ui-sans-serif, sans-serif;
+
+  --radius-md: var(--radius);
+  --shadow-card: 0 1px 2px rgb(15 23 42 / 0.04), 0 1px 3px rgb(15 23 42 / 0.06);
+  --shadow-elevated: 0 10px 30px -10px rgb(0 33 98 / 0.25);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ------------------------------------------------------------------
+   Typography
+   ------------------------------------------------------------------ */
+
+.text-h1 {
+  font-size: 1.75rem;
+  line-height: 2.25rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+}
+
+.text-h2 {
+  font-size: 1.375rem;
+  line-height: 1.875rem;
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  color: var(--text-primary);
+}
+
+.text-h3 {
+  font-size: 1.125rem;
+  line-height: 1.625rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.text-h4 {
+  font-size: 0.9375rem;
+  line-height: 1.375rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.text-body {
+  font-size: 0.875rem;
+  line-height: 1.375rem;
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.text-body-sm {
+  font-size: 0.8125rem;
+  line-height: 1.25rem;
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.text-caption {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.text-overline {
+  font-size: 0.6875rem;
+  line-height: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+.text-button {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+/* ------------------------------------------------------------------
+   Base
+   ------------------------------------------------------------------ */
+* {
+  border-color: var(--border);
+}
+
+html,
+body {
+  height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--surface-muted);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ------------------------------------------------------------------
+   Utilities
+   ------------------------------------------------------------------ */
+@utility bg-brand-gradient {
+  background-image: linear-gradient(90deg, var(--brand-secondary) 0%, var(--brand-accent) 100%);
+}
+
+@utility text-brand-gradient {
+  background-image: linear-gradient(90deg, var(--brand-secondary) 0%, var(--brand-accent) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+
+@utility focus-ring {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--brand-cta);
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility animate-toast-in {
+  animation: toast-in 0.18s ease-out both;
 }
