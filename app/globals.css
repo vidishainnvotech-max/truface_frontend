@@ -172,9 +172,10 @@
   color: var(--text-primary);
 }
 
-.text-secondary {
-  color: var(--text-secondary);
-}
+/* NOTE: Do not define `.text-secondary` here — Tailwind generates it from
+   `--color-secondary` (brand blue) in @theme above. A manual rule would
+   shadow the utility and break active tab/badge/button colors. Use
+   `.text-foreground-secondary` or `.text-subheading` for gray text instead. */
 
 .text-muted {
   color: var(--text-muted);
@@ -183,8 +184,12 @@
 /* ------------------------------------------------------------------
    Base
    ------------------------------------------------------------------ */
-* {
-  border-color: var(--border);
+@layer base {
+  /* Must live in @layer base: an unlayered `*` rule would beat every
+     Tailwind border-color utility (border-secondary, border-danger, ...). */
+  * {
+    border-color: var(--border);
+  }
 }
 
 html,

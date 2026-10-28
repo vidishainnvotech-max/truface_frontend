@@ -40,7 +40,7 @@ function validate(v: NotificationSettingsValues): Errors {
 }
 
 function SectionHeading({ children }: { children: React.ReactNode }) {
-  return <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-secondary">{children}</h4>;
+  return <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-subheading">{children}</h4>;
 }
 
 function InAppRow({

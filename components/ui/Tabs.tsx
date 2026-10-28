@@ -80,8 +80,8 @@ export function Tabs({
                     cn(
                       "-mb-px border-b-2 px-3 py-2.5",
                       active
-                        ? "border-secondary text-secondary"
-                        : "border-transparent text-foreground-secondary hover:text-foreground hover:border-border-strong"
+                        ? "border-secondary font-semibold text-secondary"
+                        : "border-transparent font-medium text-foreground-secondary hover:text-foreground hover:border-border-strong"
                     ),
                   variant === "pills" &&
                     cn(

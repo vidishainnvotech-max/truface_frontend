@@ -32,7 +32,7 @@ function validate(v: SecuritySettingsValues): Errors {
 
 function PolicyHeading({ children }: { children: React.ReactNode }) {
   return (
-    <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-secondary">{children}</h4>
+    <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-subheading">{children}</h4>
   );
 }
 
