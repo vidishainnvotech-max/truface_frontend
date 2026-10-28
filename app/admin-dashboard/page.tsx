@@ -29,13 +29,23 @@ import { Badge } from "@/components/ui/Badge";
 import { Avatar } from "@/components/ui/Avatar";
 import { StatCard, StatGrid } from "@/components/common/StatCard";
 import { DonutChart } from "@/components/charts";
+import {
+  QuickAddEmployeeModal,
+  QuickAddLocationModal,
+  QuickGenerateReportModal,
+} from "@/components/features/dashboard";
 import { cn } from "@/lib/utils";
 
-const quickActions = [
-  { label: "Add Employee", icon: Plus, primary: true },
-  { label: "Add Location", icon: Plus, primary: true },
-  { label: "View Attendance", icon: Search, primary: false },
-  { label: "Generate Report", icon: CalendarDays, primary: false },
+type QuickModalKey = "employee" | "location" | "report";
+
+const quickActions: Array<
+  | { label: string; icon: typeof Plus; primary: boolean; modal: QuickModalKey }
+  | { label: string; icon: typeof Plus; primary: boolean; href: string }
+> = [
+  { label: "Add Employee", icon: Plus, primary: true, modal: "employee" },
+  { label: "Add Location", icon: Plus, primary: true, modal: "location" },
+  { label: "View Attendance", icon: Search, primary: false, href: "/attendance" },
+  { label: "Generate Report", icon: CalendarDays, primary: false, modal: "report" },
 ];
 
 const activity = [
@@ -131,6 +141,9 @@ function HeaderActions() {
 }
 
 export default function AdminDashboardPage() {
+  const [openModal, setOpenModal] = React.useState<QuickModalKey | null>(null);
+  const closeModal = React.useCallback(() => setOpenModal(null), []);
+
   return (
     <DashboardLayout
       guarded={false}
@@ -226,6 +239,8 @@ export default function AdminDashboardPage() {
             {quickActions.map((action) => (
               <Button
                 key={action.label}
+                href={"href" in action ? action.href : undefined}
+                onClick={"modal" in action ? () => setOpenModal(action.modal) : undefined}
                 className={cn(
                   "h-10 w-full rounded-lg text-sm font-semibold",
                   action.primary
@@ -444,6 +459,10 @@ export default function AdminDashboardPage() {
           </ul>
         </Card>
       </div>
+
+      <QuickAddEmployeeModal open={openModal === "employee"} onClose={closeModal} />
+      <QuickAddLocationModal open={openModal === "location"} onClose={closeModal} />
+      <QuickGenerateReportModal open={openModal === "report"} onClose={closeModal} />
     </DashboardLayout>
   );
 }
