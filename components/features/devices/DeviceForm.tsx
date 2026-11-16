@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Select } from "@/components/ui/Select";
 import { Switch } from "@/components/ui/Switch";
-import { FormField, FormActions } from "@/components/common/Form";
+import { FormField } from "@/components/common/Form";
 import { SettingRow } from "@/components/common/SettingRow";
 import type { AuthenticationMode, ConnectionType, DeviceFormValues, DeviceType } from "@/types/devices";
 
@@ -289,14 +289,14 @@ export function DeviceForm({ mode, initialValues, onSubmit, onCancel, submitLabe
           </div>
         </Card>
 
-        <FormActions>
-          <Button type="button" variant="ghost" onClick={cancel} disabled={submitting}>
+        <div className="flex flex-wrap items-center justify-end gap-3 border-t border-border pt-6">
+          <Button type="button" variant="secondary" onClick={cancel} disabled={submitting} className="min-w-32">
             Cancel
           </Button>
-          <Button type="submit" variant="primary" loading={submitting}>
+          <Button type="submit" variant="primary" loading={submitting} className="min-w-40 bg-cta hover:bg-cta-hover">
             {submitLabel ?? (mode === "create" ? "Register Device" : "Save Changes")}
           </Button>
-        </FormActions>
+        </div>
       </div>
     </form>
   );

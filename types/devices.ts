@@ -50,3 +50,57 @@ export interface DeviceFormValues {
   heartbeatMonitoring: boolean;
   autoFirmwareUpdate: boolean;
 }
+
+export type DeviceListStatus = "online" | "warning" | "offline";
+export type DeviceScanMode = "face-rfid" | "fingerprint" | "rfid-only";
+
+export interface DeviceListItem {
+  id: string;
+  serial: string;
+  name: string;
+  location: string;
+  typeLabel: DeviceScanMode;
+  lastSync: string;
+  pendingQueue: number;
+  status: DeviceListStatus;
+}
+
+export interface DeviceDiagnosticEvent {
+  id: string;
+  time: string;
+  category: "Attendance" | "System Log" | "Security Alert";
+  message: string;
+  result: "Success" | "Info" | "Warning";
+}
+
+export interface DeviceDiagnostics {
+  verificationEvents: number;
+  pendingQueue: number;
+  failedIncidents: number;
+  uptime30d: number;
+  lastSynced: string;
+  firmwareVersion: string;
+  deviceTypeLabel: string;
+  assignedLocation: string;
+  online: boolean;
+  events: DeviceDiagnosticEvent[];
+}
+
+export interface SyncNodeRow {
+  id: string;
+  serial: string;
+  name: string;
+  plant: string;
+  pending: number;
+  synced: number;
+  lastHeartbeat: string;
+  progress: number;
+  status: "synced" | "syncing" | "failed";
+}
+
+export interface SyncCenterStats {
+  pendingDevices: number;
+  totalTransmitted24h: number;
+  failedLogs: number;
+  lastFullSync: string;
+}
