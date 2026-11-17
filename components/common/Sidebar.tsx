@@ -102,11 +102,8 @@ function SidebarItem({ item, pathname }: { item: NavItem; pathname: string }) {
         "group flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors",
         active ? "bg-secondary text-white shadow-sm" : "text-white/70 hover:bg-white/10 hover:text-white"
       )}
-      onClick={(e) => {
-        if (hasChildren) {
-          e.preventDefault();
-          setOpen((o) => !o);
-        }
+      onClick={() => {
+        if (hasChildren) setOpen((o) => !o);
       }}
     >
       <Icon className="h-[18px] w-[18px] shrink-0" />
@@ -126,7 +123,7 @@ function SidebarItem({ item, pathname }: { item: NavItem; pathname: string }) {
       {hasChildren && open && (
         <ul className="mt-0.5 ml-4 space-y-0.5 border-l border-white/10 pl-3">
           {item.children!.map((child) => {
-            const childActive = pathname === child.href;
+            const childActive = pathname === child.href || pathname.startsWith(`${child.href}/`);
             return (
               <li key={child.href}>
                 <Link

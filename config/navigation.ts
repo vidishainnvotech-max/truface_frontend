@@ -25,7 +25,7 @@ export const navigation: NavSection[] = [
       { label: "Employees", href: "/employees", icon: Users },
       { label: "Locations", href: "/locations", icon: MapPin },
       { label: "Devices", href: "/devices", icon: MonitorSmartphone },
-      { label: "Attendance", href: "/attendance", icon: CalendarCheck },
+      { label: "Attendance", href: "/attendance", icon: CalendarCheck, children: [{ label: "Live Feed", href: "/attendance/live" }, { label: "Records", href: "/attendance/records" }] },
       { label: "Security", href: "/security", icon: ShieldCheck },
       { label: "Reports", href: "/reports", icon: FileBarChart2 },
       { label: "Logs", href: "/logs", icon: ScrollText },
